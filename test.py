@@ -2,6 +2,8 @@ import numpy as np
 import platform
 from transformers import BertTokenizer
 from rknnlite.api import RKNNLite
+from data_preprocessing import load_dataset, adjust_input_size
+
 
 # RKNN 모델 파일 경로
 RKNN_MODEL = 'transformer.rknn'
@@ -68,7 +70,10 @@ if __name__ == '__main__':
     # 데이터셋 로드
     print('--> 데이터셋 로드 중...')
     src_data = load_dataset(SRC_DATASET)
+    src_data = adjust_input_size(src_data, REQUIRED_SIZE)
     tgt_data = load_dataset(TGT_DATASET)
+    tgt_data = adjust_input_size(tgt_data, REQUIRED_SIZE)
+
 
     # 실행 환경 초기화
     print('--> Init runtime environment')
